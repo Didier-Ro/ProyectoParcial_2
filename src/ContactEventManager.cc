@@ -36,18 +36,22 @@ void ContactEventManager::BeginContact(b2Contact* contact)
     if(actorB->GetTagName().compare("apple") == 0)
     {
       std::cout<<"+1"<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
     }
     if(actorB->GetTagName().compare("orange") == 0)
     {
       std::cout<<"+1"<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
     }
     if(actorB->GetTagName().compare("strawberry") == 0)
     {
       std::cout<<"+1"<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
     }
     if(actorB->GetTagName().compare("cherry") == 0)
     {
       std::cout<<"+1"<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
     }
   }
 }
