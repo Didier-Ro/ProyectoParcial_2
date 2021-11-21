@@ -1,6 +1,5 @@
 #include "CommonHeaders.hh"
 #include "Player.hh"
-#include "Animation.hh"
 #include "TileGroup.hh"
 
 
@@ -20,8 +19,18 @@ GameObject* apple{};
 GameObject* orange{};
 GameObject* strawberry{};
 GameObject* cherry{};
-
-Animation* idleAnimation{new Animation()};
+GameObject* dot1{};
+GameObject* dot2{};
+GameObject* dot3{};
+GameObject* dot4{};
+GameObject* dot5{};
+GameObject* dot6{};
+GameObject* dot7{};
+GameObject* dot8{};
+GameObject* dot9{};
+GameObject* dot10{};
+GameObject* dot11{};
+GameObject* dot12{};
 
 TileGroup* tileGroup{};
 Tile* tile1{};
@@ -32,12 +41,6 @@ uint32 flags{};
     //flags += b2Draw::e_centerOfMassBit;
     //flags += b2Draw::e_pairBit;
     //flags += b2Draw::e_jointBit;
-
-Animation* lightIdle{};
-Animation* slimeAnimation{};
-Animation* batAnimation{};
-Animation* chestAnimation1{};
-Animation* elfAnimation1{};
 
 Game::Game()
 {
@@ -69,18 +72,35 @@ Game::Game()
   strawberry->SetTagName("strawberry");
   cherry = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 3, 8, 700, 850, b2BodyType::b2_staticBody, world, window);
   cherry->SetTagName("cherry");
+  dot1 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 600, 355, b2BodyType::b2_staticBody, world, window);
+  dot1->SetTagName("Dot");
+  dot2 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 300, 355, b2BodyType::b2_staticBody, world, window);
+  dot2->SetTagName("Dot");
+  dot3 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 485, 650, b2BodyType::b2_staticBody, world, window);
+  dot3->SetTagName("Dot");
+  dot4 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 410, 650, b2BodyType::b2_staticBody, world, window);
+  dot4->SetTagName("Dot");
+  dot5 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 600, 285, b2BodyType::b2_staticBody, world, window);
+  dot5->SetTagName("Dot");
+  dot6 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 300, 285, b2BodyType::b2_staticBody, world, window);
+  dot6->SetTagName("Dot");
+  dot7 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 860, 285, b2BodyType::b2_staticBody, world, window);
+  dot7->SetTagName("Dot");
+  dot8 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 35, 285, b2BodyType::b2_staticBody, world, window);
+  dot8->SetTagName("Dot");
+  dot9 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 35, 650, b2BodyType::b2_staticBody, world, window);
+  dot9->SetTagName("Dot");
+  dot10 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 860, 650, b2BodyType::b2_staticBody, world, window);
+  dot10->SetTagName("Dot");
+  dot11 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 600, 855, b2BodyType::b2_staticBody, world, window);
+  dot11->SetTagName("Dot");
+  dot12 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 9, 300, 855, b2BodyType::b2_staticBody, world, window);
+  dot12->SetTagName("Dot");
 
   
   tileGroup = new TileGroup(window, 30, 31, ASSETS_MAPS, 2.f, 16, 16, ASSETS_MAP_PACMAN);
 
   contactEventManager = new ContactEventManager(gameObjects, gameObjectsDeleteList);
-
-
-  lightIdle = new Animation(light1->GetSprite(), 6, 11, 0.1f, 3);
-  slimeAnimation = new Animation(slime1->GetSprite(), 0, 5, 0.1f, 3);
-  batAnimation = new Animation(bat1->GetSprite(), 0, 3, 0.1f, 0);
-  chestAnimation1 = new Animation(chest1->GetSprite(), 6, 14, 0.1f, 1);
-  elfAnimation1 = new Animation(elf1->GetSprite(), 0, 5, 0.1f, 1);
 }
 
 Game::~Game()
@@ -105,9 +125,20 @@ void Game::Start()
   AddGameObject(orange);
   AddGameObject(strawberry);
   AddGameObject(cherry);
+  AddGameObject(dot1);
+  AddGameObject(dot2);
+  AddGameObject(dot3);
+  AddGameObject(dot4);
+  AddGameObject(dot5);
+  AddGameObject(dot6);
+  AddGameObject(dot7);
+  AddGameObject(dot8);
+  AddGameObject(dot9);
+  AddGameObject(dot10);
+  AddGameObject(dot11);
+  AddGameObject(dot12);
 
   textObj1->SetTextStr("Hello game engine");
-  idleAnimation = new Animation(player1->GetSprite(), 0, 2, 0.35f, 0);
 
   /*circle->setRadius(2.f);
   circle->setFillColor(sf::Color::Green);
@@ -125,6 +156,7 @@ void Game::UpdatePhysics()
   world->ClearForces();
   world->Step(deltaTime, 8, 8);
 }
+
 //Logic, animations, etc
 void Game::Update()
 {
@@ -138,12 +170,16 @@ void Game::Update()
 
   //circle->setPosition(player1->GetSprite()->getPosition());
 
-  lightIdle->Play(deltaTime);
-  slimeAnimation->Play(deltaTime);
-  batAnimation->Play(deltaTime);
-  chestAnimation1->Play(deltaTime);
-  elfAnimation1->Play(deltaTime);
-  idleAnimation->Play(deltaTime);
+  //lightIdle->Play(deltaTime);
+
+  /*if(std::abs(InputSystem::Axis().x) > 0 || std::abs(InputSystem::Axis().y) > 0)
+  {
+    runAnimation->Play(deltaTime);
+  }
+  else
+  {
+    idleAnimation->Play(deltaTime);
+  }*/
 }
 
 void Game::MainLoop()
@@ -187,7 +223,6 @@ void Game::Draw()
   //window->draw(*circle);
 
   tileGroup->Draw();
-  //tile1->Draw();
 
   for(auto &gameObject : *gameObjects)
   {
@@ -201,7 +236,6 @@ void Game::Draw()
 //Keyboard, joysticks, etc.
 void Game::Input()
 {
-  //player1->Move();
 }
 
 void Game::Destroy()

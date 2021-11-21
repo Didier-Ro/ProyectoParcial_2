@@ -2,14 +2,12 @@
 
 class InputSystem
 {
-private:
-    
 public:
-    InputSystem(){}
-    ~InputSystem(){}
+  InputSystem(){}
+  ~InputSystem(){}
 
-    static sf::Vector2f Axis()
-    {
+  static sf::Vector2f Axis()
+  {
     sf::Vector2f axis{};
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) | sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -30,7 +28,5 @@ public:
     }
 
     return axis;
-    }  
+  }
 };
-
-
