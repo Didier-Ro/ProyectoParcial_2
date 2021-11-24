@@ -2,6 +2,8 @@
 #include "GameObject.hh"
 #include<iostream>
 
+int score = 0;
+
 ContactEventManager::ContactEventManager(std::vector<GameObject*>*& gameObjects, std::vector<GameObject*>*& gameObjectsDeleteList)
 {
   this->gameObjects = gameObjects;
@@ -21,10 +23,17 @@ void ContactEventManager::BeginContact(b2Contact* contact)
   if(actorA && actorB)
   {
     std::cout << "Collision: " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
-    if(actorB->GetTagName().compare("chest") || actorB->GetTagName().compare("light"))
+    if(actorB->GetTagName().compare("orange")||actorB->GetTagName().compare("strawberry")||actorB->GetTagName().compare("cherry")||actorB->GetTagName().compare("apple"))
     {
       gameObjectsDeleteList->push_back(actorB);
+      score = score + 100;
+      std::cout<<score<<std::endl;
     }
+    if(actorB->GetTagName().compare("Dot"))
+    {
+      score = score + 500;
+      std::cout<<score<<std::endl;
+    }   
   }
 }
 

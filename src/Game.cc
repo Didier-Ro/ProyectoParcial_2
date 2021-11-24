@@ -1,6 +1,7 @@
 #include "CommonHeaders.hh"
 #include "Player.hh"
 #include "TileGroup.hh"
+#include "Enemy.hh"
 
 
 sf::CircleShape* circle{new sf::CircleShape()};
@@ -10,6 +11,7 @@ TextObject* textObj1{new TextObject(ASSETS_FONT_ARCADECLASSIC, 14, sf::Color::Wh
 sf::Clock* gameClock{new sf::Clock()};
 float deltaTime{};
 Player* player1{};
+Enemy* enemy{};
 GameObject* chest1{};
 GameObject* light1{};
 GameObject* slime1{};
@@ -54,6 +56,7 @@ Game::Game()
 
   player1 = new Player(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 0, 450, 560, 200.f, b2BodyType::b2_dynamicBody, world, window);
   player1->SetTagName("Player");
+  enemy = new Enemy(ASSETS_SPRITES, 4.f, 16, 16, 0, 1, 450, 600, 200.f, b2BodyType::b2_dynamicBody, world, window, 3.f,sf::Vector2f(1,0));
   chest1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 6, 1, 300, 450, b2BodyType::b2_staticBody, world, window);
   chest1->SetTagName("chest");
   light1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 6, 3, 500, 470, b2BodyType::b2_staticBody, world, window);
@@ -137,6 +140,7 @@ void Game::Start()
   AddGameObject(dot10);
   AddGameObject(dot11);
   AddGameObject(dot12);
+  AddGameObject(enemy);
 
   textObj1->SetTextStr("Hello game engine");
 
