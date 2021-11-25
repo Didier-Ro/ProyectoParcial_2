@@ -2,8 +2,6 @@
 #include "GameObject.hh"
 #include<iostream>
 
-int score = 0;
-
 ContactEventManager::ContactEventManager(std::vector<GameObject*>*& gameObjects, std::vector<GameObject*>*& gameObjectsDeleteList)
 {
   this->gameObjects = gameObjects;

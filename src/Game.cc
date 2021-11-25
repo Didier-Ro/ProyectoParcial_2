@@ -12,12 +12,13 @@ sf::Clock* gameClock{new sf::Clock()};
 float deltaTime{};
 Player* player1{};
 Enemy* enemy{};
+Enemy* enemy2{};
+Enemy* enemy3{};
+Enemy* enemy4{};
 GameObject* chest1{};
 GameObject* light1{};
-GameObject* slime1{};
-GameObject* bat1{};
-GameObject* elf1{};
 GameObject* apple{};
+GameObject* apple2{};
 GameObject* orange{};
 GameObject* strawberry{};
 GameObject* cherry{};
@@ -56,19 +57,22 @@ Game::Game()
 
   player1 = new Player(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 0, 450, 560, 200.f, b2BodyType::b2_dynamicBody, world, window);
   player1->SetTagName("Player");
-  enemy = new Enemy(ASSETS_SPRITES, 4.f, 16, 16, 0, 1, 450, 600, 200.f, b2BodyType::b2_dynamicBody, world, window, 3.f,sf::Vector2f(1,0));
+  enemy = new Enemy(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 2, 360, 750, 200.f, b2BodyType::b2_dynamicBody, world, window, 2.4f,sf::Vector2f(1,0));
+  enemy->SetTagName("Ghost");
+  enemy2 = new Enemy(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 3, 180, 180, 200.f, b2BodyType::b2_dynamicBody, world, window, 4.f,sf::Vector2f(1,0));
+  enemy2->SetTagName("Ghost");
+  enemy3 = new Enemy(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 4, 205, 390, 200.f, b2BodyType::b2_dynamicBody, world, window, 2.f,sf::Vector2f(0,1));
+  enemy3->SetTagName("Ghost");
+  enemy4 = new Enemy(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 5, 685, 390, 200.f, b2BodyType::b2_dynamicBody, world, window, 2.f,sf::Vector2f(0,1));
+  enemy4->SetTagName("Ghost");
   chest1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 6, 1, 300, 450, b2BodyType::b2_staticBody, world, window);
   chest1->SetTagName("chest");
   light1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 6, 3, 500, 470, b2BodyType::b2_staticBody, world, window);
   light1->SetTagName("light");
-  slime1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 0, 4, 200, 150, b2BodyType::b2_staticBody, world, window);
-  slime1->SetTagName("slime");
-  bat1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 0, 0, 700, 150, b2BodyType::b2_staticBody, world, window);
-  bat1->SetTagName("bat");
-  elf1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 0, 1, 205, 750, b2BodyType::b2_staticBody, world, window);
-  elf1->SetTagName("elf");
-  apple = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 8, 450, 180, b2BodyType::b2_staticBody, world, window);
+  apple = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 8, 500, 50, b2BodyType::b2_staticBody, world, window);
   apple->SetTagName("apple");
+  apple2 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 8, 400, 50, b2BodyType::b2_staticBody, world, window);
+  apple2->SetTagName("apple");
   orange = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 1, 8, 600, 450, b2BodyType::b2_staticBody, world, window);
   orange->SetTagName("orange");
   strawberry = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 2, 8, 450, 750, b2BodyType::b2_staticBody, world, window);
@@ -119,12 +123,14 @@ void Game::Start()
   world->SetContactListener(contactEventManager);
 
   AddGameObject(player1);
+  AddGameObject(enemy);
+  AddGameObject(enemy2);
+  AddGameObject(enemy3);
+  AddGameObject(enemy4);
   AddGameObject(chest1);
   AddGameObject(light1);
-  AddGameObject(slime1);
-  AddGameObject(bat1);
-  AddGameObject(elf1);
   AddGameObject(apple);
+  AddGameObject(apple2);
   AddGameObject(orange);
   AddGameObject(strawberry);
   AddGameObject(cherry);
@@ -140,7 +146,6 @@ void Game::Start()
   AddGameObject(dot10);
   AddGameObject(dot11);
   AddGameObject(dot12);
-  AddGameObject(enemy);
 
   textObj1->SetTextStr("Hello game engine");
 

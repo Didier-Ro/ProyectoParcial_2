@@ -8,6 +8,7 @@ class ContactEventManager : public b2ContactListener
 private:
   std::vector<GameObject*>* gameObjects;
   std::vector<GameObject*>* gameObjectsDeleteList;
+  int score{};
 public:
   ContactEventManager(std::vector<GameObject*>*& gameObjects, std::vector<GameObject*>*& gameObjectsDeleteList);
   ~ContactEventManager();

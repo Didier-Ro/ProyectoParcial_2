@@ -15,14 +15,14 @@ private:
 
   sf::Vector2f direction{};
 
-  void FlipSpriteEnemy();
-  //AnimationSystem* animationEnemySystem{};
+  void FlipSprite();
+  AnimationSystem* animationSystem{};
 
 public:
   Enemy(std::string textureUrl, float scale, int width, int height, int column, int row, float posX, float posY, float enemySpeed,
   b2BodyType bodyType, b2World*& world, sf::RenderWindow*& window, float maxTime, sf::Vector2f direction);
   ~Enemy();
-  sf::Sprite* GetEnemySprite() const;
+  sf::Sprite* GetSprite() const;
 
   void Update(float& deltaTime) override;
   void Draw() override;

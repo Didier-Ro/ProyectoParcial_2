@@ -10,9 +10,9 @@ GameObject(textureUrl, scale, width, height, column, row, posX, posY, bodyType, 
   this->maxTime = maxTime;
   this->direction = direction;
 
-  //animationEnemySystem = new AnimationSystem{};
+  animationSystem = new AnimationSystem{};
 
-  //animationEnemySystem->AddAnimation("idleEnemy",new Animation(sprite, "assets/animations/player/idleEnemy.anim"));
+  animationSystem->AddAnimation("idleEnemy",new Animation(sprite, "assets/animations/enemy/idle.anim"));
   
   
 
@@ -23,7 +23,7 @@ Enemy::~Enemy()
 {
 }
 
-sf::Sprite* Enemy::GetEnemySprite() const
+sf::Sprite* Enemy::GetSprite() const
 {
   return sprite;
 }
@@ -34,16 +34,22 @@ void Enemy::Update(float& deltaTime)
   //animationEnemySystem->Update(deltaTime);
   GameObject::Update(deltaTime);
   currentTime += deltaTime;
-  /*rigidbody->GetBody()->SetLinearVelocity(b2Vec2(direction.x * enemySpeed,
-  direction.y * enemySpeed));*/
+  rigidbody->GetBody()->SetLinearVelocity(b2Vec2(-direction.x * enemySpeed,
+  -direction.y * enemySpeed));
   if(currentTime>=maxTime){
-    direction = sf::Vector2f(-direction.x,  direction.y);
+    direction = sf::Vector2f(-direction.x,  -direction.y);
     currentTime=0.f;
-
   }
 }
 
 void Enemy::Draw()
 {
   GameObject::Draw();
+}
+
+void Enemy::FlipSprite()
+{
+  sprite->setScale(direction.x > 0 ? scale : direction.x < 0 ? -scale :
+  sprite->getScale().x,
+  scale);
 }
