@@ -1,6 +1,6 @@
 #include "ContactEventManager.hh"
 #include "GameObject.hh"
-#include<iostream>
+#include <iostream>
 
 ContactEventManager::ContactEventManager(std::vector<GameObject*>*& gameObjects, std::vector<GameObject*>*& gameObjectsDeleteList)
 {
@@ -21,21 +21,53 @@ void ContactEventManager::BeginContact(b2Contact* contact)
   if(actorA && actorB)
   {
     std::cout << "Collision: " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
-    if(actorB->GetTagName().compare("orange")||actorB->GetTagName().compare("strawberry")||actorB->GetTagName().compare("cherry")||actorB->GetTagName().compare("apple"))
+    if(actorB->GetTagName().compare("Ghost") == 0)
     {
-      gameObjectsDeleteList->push_back(actorB);
-      score = score + 100;
-      std::cout<<score<<std::endl;
-    }
-    if(actorB->GetTagName().compare("Dot"))
+      gameObjectsDeleteList->push_back(actorA);
+      std::cout<<"Game Over"<<std::endl;
+    }  
+    if(actorB->GetTagName().compare("Strawberry") == 0)
     {
       score = score + 500;
       std::cout<<score<<std::endl;
-    }   
+      gameObjectsDeleteList->push_back(actorB);
+    }
+
+    if(actorB->GetTagName().compare("Orange") == 1)
+    {
+      score = score + 500;
+      std::cout<<score<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
+    }
+
+    if(actorB->GetTagName().compare("Apple") == 0)
+    {
+      score = score + 500;
+      std::cout<<score<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
+    }
+
+    if(actorB->GetTagName().compare("Cherry") == 0)
+    {
+      score = score + 500;
+      std::cout<<score<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
+    }
+
+    if(actorB->GetTagName().compare("Dot") == 0)
+    {
+      score = score + 100;
+      std::cout<<score<<std::endl;
+      gameObjectsDeleteList->push_back(actorB);
+    }
+
+    if(score >= 3700)
+    {
+      std::cout<<"You Win"<<std::endl;
+    }
   }
 }
 
 void ContactEventManager::EndContact(b2Contact* contact)
 {
-
 }

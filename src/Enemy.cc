@@ -1,7 +1,5 @@
 #include "Enemy.hh"
 
-
-
 Enemy::Enemy(std::string textureUrl, float scale, int width, int height, int column, int row, float posX, float posY, float enemySpeed,
 b2BodyType bodyType, b2World*& world, sf::RenderWindow*& window, float maxTime, sf::Vector2f direction) :
 GameObject(textureUrl, scale, width, height, column, row, posX, posY, bodyType, world, window)

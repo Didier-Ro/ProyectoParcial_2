@@ -3,10 +3,9 @@
 #include "TileGroup.hh"
 #include "Enemy.hh"
 
-
 sf::CircleShape* circle{new sf::CircleShape()};
 
-TextObject* textObj1{new TextObject(ASSETS_FONT_ARCADECLASSIC, 14, sf::Color::White, sf::Text::Bold)};
+TextObject* textObj1{new TextObject(ASSETS_FONT_ARCADECLASSIC, 30, sf::Color::Yellow, sf::Text::Bold)};
 
 sf::Clock* gameClock{new sf::Clock()};
 float deltaTime{};
@@ -15,8 +14,6 @@ Enemy* enemy{};
 Enemy* enemy2{};
 Enemy* enemy3{};
 Enemy* enemy4{};
-GameObject* chest1{};
-GameObject* light1{};
 GameObject* apple{};
 GameObject* apple2{};
 GameObject* orange{};
@@ -65,17 +62,13 @@ Game::Game()
   enemy3->SetTagName("Ghost");
   enemy4 = new Enemy(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 5, 685, 390, 200.f, b2BodyType::b2_dynamicBody, world, window, 2.f,sf::Vector2f(0,1));
   enemy4->SetTagName("Ghost");
-  chest1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 6, 1, 300, 450, b2BodyType::b2_staticBody, world, window);
-  chest1->SetTagName("chest");
-  light1 = new GameObject(ASSETS_SPRITES, 4.f, 16, 16, 6, 3, 500, 470, b2BodyType::b2_staticBody, world, window);
-  light1->SetTagName("light");
   apple = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 8, 500, 50, b2BodyType::b2_staticBody, world, window);
   apple->SetTagName("apple");
   apple2 = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 0, 8, 400, 50, b2BodyType::b2_staticBody, world, window);
   apple2->SetTagName("apple");
   orange = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 1, 8, 600, 450, b2BodyType::b2_staticBody, world, window);
   orange->SetTagName("orange");
-  strawberry = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 2, 8, 450, 750, b2BodyType::b2_staticBody, world, window);
+  strawberry = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 2, 8, 450, 940, b2BodyType::b2_staticBody, world, window);
   strawberry->SetTagName("strawberry");
   cherry = new GameObject(ASSETS_SPRITES_PACMAN, 2.f, 32, 32, 3, 8, 700, 850, b2BodyType::b2_staticBody, world, window);
   cherry->SetTagName("cherry");
@@ -127,8 +120,6 @@ void Game::Start()
   AddGameObject(enemy2);
   AddGameObject(enemy3);
   AddGameObject(enemy4);
-  AddGameObject(chest1);
-  AddGameObject(light1);
   AddGameObject(apple);
   AddGameObject(apple2);
   AddGameObject(orange);
@@ -147,7 +138,7 @@ void Game::Start()
   AddGameObject(dot11);
   AddGameObject(dot12);
 
-  textObj1->SetTextStr("Hello game engine");
+  textObj1->SetTextStr("The Amazing PacMan");
 
   /*circle->setRadius(2.f);
   circle->setFillColor(sf::Color::Green);
